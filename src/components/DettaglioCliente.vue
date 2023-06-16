@@ -1,7 +1,7 @@
 <template>
 <div>
 <b-modal id="modal-dettagliCliente" hide-footer :title="dettagliCliente.titoloCliente" size="xl" >
-  <b-tabs content-class="mt-3">
+  <b-tabs content-class="mt-3" active-nav-item-class="active-link">
     <b-tab title="Info Cliente" active>
       <b-container fluid>
         <b-row>

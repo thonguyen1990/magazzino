@@ -40,22 +40,27 @@
                                     font-scale="1.3"></b-icon></span></span>
                         <b-form-input size="sm" class="mr-sm-2 seach_input" v-model="prodotto"></b-form-input>
                     </b-form>
-                    <b-img :src="require('../../assets/soloLogo_b.png')" fluid alt="Responsive image" width=30
-                        style="margin: 0.5rem; position: absolute; left: 49%;"></b-img>
+                    <router-link to="/">
+                        <b-img :src="require('../../assets/soloLogo_b.png')" fluid alt="Responsive image" width=30
+                            style="margin: 0.5rem; position: absolute; left: 49%; top: 0.4rem;"></b-img>
+                    </router-link>
+
 
                     <!-- Right aligned nav items -->
                     <b-navbar-nav class="ml-auto">
                         <b-nav-form>
-                            <b-navbar-brand to="/note" class="pencil-split"><span class="itemNB"><b-icon icon="pencil-square"
-                                        font-scale="1.3"></b-icon></span></b-navbar-brand>
+                            <b-navbar-brand to="/note" class="pencil-split"><span class="itemNB"><b-icon
+                                        icon="pencil-square" font-scale="1.3"></b-icon></span></b-navbar-brand>
                             <b-navbar-brand to="/nuoviarrivi" class="clock-split"><span class="itemNB"><b-icon icon="clock"
                                         font-scale="1.3"></b-icon></span></b-navbar-brand>
 
                             <b-icon style="color: whitesmoke; margin-right: 1rem;" icon="calculator" font-scale="1.3"
                                 @click="toggleCalCulator()" class="calculator-split"></b-icon>
                             <Calculator v-if="calc"></Calculator>
-                            <b-navbar-brand v-if="goldPrice" class="gold-price-split" style="color:whitesmoke">{{ goldPrice }} €/gr</b-navbar-brand>
-                            <b-navbar-brand v-else="goldPrice" class="gold-price-split" style="color: whitesmoke">0 €/gr</b-navbar-brand>
+                            <b-navbar-brand v-if="goldPrice" class="gold-price-split" style="color:whitesmoke">{{ goldPrice
+                            }} €/gr</b-navbar-brand>
+                            <b-navbar-brand v-else="goldPrice" class="gold-price-split" style="color: whitesmoke">0
+                                €/gr</b-navbar-brand>
                             <b-navbar-brand to="/agenda" style="color: gray;"><b-icon icon="gear-fill" font-scale="1.3"
                                     style="margin-left:2em;"></b-icon></b-navbar-brand>
                         </b-nav-form>
@@ -876,17 +881,17 @@ export default {
 
 @media (max-width: 1100px) {
 
-.ml-auto .gold-price-split,
-.ml-auto .calculator-split {
-  display: none !important;
-}
+    .ml-auto .gold-price-split,
+    .ml-auto .calculator-split {
+        display: none !important;
+    }
 }
 
 @media (max-width: 1360px) {
-.ml-auto .pencil-split,
-.ml-auto .clock-split{
-  display: none !important;
-}
-}
 
+    .ml-auto .pencil-split,
+    .ml-auto .clock-split {
+        display: none !important;
+    }
+}
 </style>

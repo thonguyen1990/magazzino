@@ -32,11 +32,14 @@
           <b-dropdown-item href="#" to="/pietre/altre/TUTTO">Altre Pietre</b-dropdown-item>
         </b-nav-item-dropdown>
         <b-form class="search">
-          <span style="display: flex;"><span class="itemNB" style="display: flex; align-items: center;"><b-icon
-                icon="search" font-scale="1.3"></b-icon></span></span>
-          <b-form-input size="sm" class="mr-sm-2 seach_input" v-model="prodotto"></b-form-input>
+          <span style="display: flex; cursor: pointer;" @click="search"><span class="itemNB"
+              style="display: flex; align-items: center;"><b-icon icon="search" font-scale="1.3"></b-icon></span></span>
+          <b-form-input size="sm" class="mr-sm-2 ml-2 seach_input" v-model="prodotto" ref="searchInput"></b-form-input>
         </b-form>
-        <b-img :src="require('../assets/soloLogo_b.png')" fluid alt="Responsive image" width=30 style="margin: 0.5rem; position: absolute; left: 49%;"></b-img>
+        <router-link to="/">
+          <b-img :src="require('../assets/soloLogo_b.png')" fluid alt="Responsive image" width=30
+            style="margin: 0.5rem; position: absolute; left: 49%; top: 0.4rem;"></b-img>
+        </router-link>
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
@@ -590,6 +593,9 @@ export default {
 
   },
   methods: {
+    search() {
+      this.$refs.searchInput.focus();
+    },
     chiusuraModale() {
       this.isFiltriAttivi();
     },
@@ -949,8 +955,9 @@ export default {
 }
 
 @media (max-width: 600px) {
+
   .ml-auto .pencil,
-  .ml-auto .clock{
+  .ml-auto .clock {
     display: none !important;
   }
 }

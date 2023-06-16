@@ -59,7 +59,7 @@
     </b-row>
     <b-row style="margin-top:0.3em">
       <b-col>
-        <b-tabs content-class="mt-3">
+        <b-tabs content-class="mt-3" active-nav-item-class="active-link">
           <b-tab title="Elenco Visite" active>
             <b-row>
               <b-form-group

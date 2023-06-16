@@ -26,7 +26,7 @@
     <div class="row">
 
       <div>
-        <b-tabs  content-class="mt-3">
+        <b-tabs  content-class="mt-3" active-nav-item-class="active-link">
           <b-tab v-bind:key="cat.index" v-for="cat in categorie" :title="cat.nome+' ('+cat.n+')'" @click="currentCat = cat.id">
             <b-card-group columns>
               <Nota v-bind:key="mynota.index" v-for="mynota in filteredNote"   @showNota="updateShowNota" @modificaNota="updateModificaNota" @eliminaNota="updateEliminaNota" v-bind:myNota="mynota" />

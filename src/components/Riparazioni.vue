@@ -101,7 +101,7 @@
     <b-modal id="modal-nuovaRiparazione" hide-footer :title="titoloRiparazione" size="xl" >
       <b-form @submit="onSubmitNuovaRiparazione">
 
-        <b-tabs content-class="mt-3">
+        <b-tabs content-class="mt-3" active-nav-item-class="active-link">
           <b-tab title="Info Lavorazione" active>
 
             <b-row><b-col>

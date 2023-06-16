@@ -88,7 +88,7 @@
     <b-modal id="modal-nuovoLAB" hide-footer :title="titoloRiparazione" size="xl" >
       <b-form @submit="onSubmitNuovoLAB">
 
-        <b-tabs content-class="mt-3" v-model="panelIndex">
+        <b-tabs content-class="mt-3" v-model="panelIndex"  active-nav-item-class="active-link">
           <b-tab title="Informazioni" >
 
             <b-row>

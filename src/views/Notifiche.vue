@@ -15,7 +15,7 @@
       </b-row>
 
 
-      <b-tabs content-class="mt-3">
+      <b-tabs content-class="mt-3" active-nav-item-class="active-link">
         <b-tab title="Attuali" active>
           <b-list-group class="mt-2">
             <b-list-group-item v-for="n in filtroInviate" v-bind:key="n.tipo+''+n.id" href="#" class="flex-column align-items-start">

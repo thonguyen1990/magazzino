@@ -66,6 +66,10 @@ body {
   background-color: #500d00 !important;
   border: none !important;
 }
+.seach_input:focus {
+  border: 1px white solid !important;
+  border-radius: 0.5rem;
+}
 .itemHOME {
   border: 1px whitesmoke solid !important;
   letter-spacing: 2px;
