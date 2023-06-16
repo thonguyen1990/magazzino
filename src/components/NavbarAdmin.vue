@@ -103,11 +103,12 @@
 
 
         <!-- this setting: this.$session.exists() && (this.$session.get('AUTORIZZAZIONI').db == 2) -->
-        <b-navbar-brand right v-if="this.$session.exists()" href="#" to="/gestioneDB"><span style="color: black;"><b-icon
-              icon="tools" font-scale="1" style="margin-left: 2em;"></b-icon></span></b-navbar-brand>
+        <b-navbar-brand right v-if="this.$session.exists()" href="#" to="/gestioneDB"><span
+            style="color: whitesmoke;"><b-icon icon="tools" font-scale="1"
+              style="margin-left: 2em;"></b-icon></span></b-navbar-brand>
 
 
-        <b-navbar-brand right v-if="this.$session.exists()" href="#" to="/logout"><span style="color: black;"><b-icon
+        <b-navbar-brand right v-if="this.$session.exists()" href="#" to="/logout"><span style="color: whitesmoke;"><b-icon
               icon="door-closed" font-scale="1" style="margin-left: 2rem;"></b-icon></span></b-navbar-brand>
       </b-navbar-nav>
     </b-collapse>
@@ -203,21 +204,23 @@ export default {
 @media (max-width: 1100px) {
 
   .navbar .agenda-show {
-    display: block;
+    display: flex;
   }
+
   .agenda-note,
   .agenda-noti {
     display: none !important;
   }
+
   .navbar .show .left-agenda {
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
-.navbar .show .ml-auto {
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
-}
-</style>
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .navbar .show .ml-auto {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}</style>

@@ -936,6 +936,10 @@ export default {
   border-top: 0 !important;
 }
 
+.navbar .show.dropdown-menu {
+  display: block !important;
+}
+
 @media (max-width: 750px) {
 
   .ml-auto .gold-price,
@@ -949,4 +953,5 @@ export default {
   .ml-auto .clock{
     display: none !important;
   }
-}</style>
+}
+</style>
