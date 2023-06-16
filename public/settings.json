@@ -1,8 +1,10 @@
 {
-  "URL_SERVER": "http://localhost/daverioPannello/",
-  "PROTOCOLLO": "http://",
-  "SERVER_NAME": "localhost/daverioPannello/",
-  "URL_WEBAPP": "http://localhost:8080/",
-  "CAT_MOSTRA_DESCR": ["Vetrina 1", "Vetrina 2"],
-  "DEBUG": false
+	"URL_SERVER":"https://magazzino.daverio1933.it/",
+	"PROTOCOLLO":"https://",
+	"SERVER_NAME":"magazzino.daverio1933.it/",
+	"URL_WEBAPP":"https://magazzino.daverio1933.it/",
+	"CAT_MOSTRA_DESCR": [
+		"Vetrina 1", "Vetrina 2"
+	],
+	"DEBUG":false
 }
