@@ -1,0 +1,263 @@
+html,
+body {
+  height: 100%;
+  cursor: default;
+}
+.modal-fullscreen .modal-dialog {
+  max-width: 100%;
+  margin: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90vh;
+  display: flex;
+  position: fixed;
+  z-index: 100000;
+}
+/* .modal-fullscreen2 .modal-dialog {
+} */
+.immagine-vetrina {
+  margin-top: 0;
+}
+.insideWrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.canvas-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.alertFixed {
+  position: absolute;
+  z-index: 999;
+}
+.img-categorie {
+  width: auto;
+  height: 300px;
+}
+.img-categorie2 {
+  width: auto;
+  height: 150px;
+}
+.img-vendite {
+  width: auto;
+  height: 120px;
+}
+.navbar-custom {
+  background-color: #500d00;
+  background-image: linear-gradient(to right, #500d00 85%, white);
+}
+.nav-link {
+  color: whitesmoke;
+}
+.search {
+  display: flex;
+}
+.navbar-admin {
+  background-color: #04373a;
+  height: 5rem;
+  padding-right: 0 !important;
+}
+.seach_input {
+  color: whitesmoke !important;
+  background-color: #500d00 !important;
+  border: none !important;
+}
+.itemHOME {
+  border: 1px whitesmoke solid !important;
+  letter-spacing: 2px;
+  margin-left: 1rem;
+  background-color: #500d00 !important;
+  width: 5rem;
+}
+.itemNB {
+  color: #fff;
+  font-size: 1.2em;
+}
+.price-range {
+  height: 13rem;
+  display: flex;
+  align-items: center;
+}
+.price-range-controller {
+  height: 9rem;
+  display: block;
+  background-color: rgba(235, 235, 235, 255);
+}
+.price-sign {
+  color: rgba(184, 184, 184, 255);
+  float: right;
+  margin-top: 0.5rem;
+}
+.buttonNB {
+  color: #fff;
+  font-size: 1.2em;
+}
+.nonDisp {
+  background:
+      /* On "top" */ repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      #ccc 10px,
+      #ccc 20px
+    ),
+    /* on "bottom" */ linear-gradient(to bottom, transparent, transparent);
+}
+button.close {
+  font-size: 3em;
+}
+.titoliSezioniPagProd {
+  float: left;
+  font-style: italic;
+  font-size: 1.2em;
+}
+
+.azione {
+  cursor: pointer;
+}
+.uploaderDiv {
+  text-align: center;
+  background-color: #d2e3fc;
+  border-style: dashed;
+  border: 1px dashed blue;
+}
+
+.txtCategoria {
+  font-size: 2rem;
+}
+.txtCategoria2 {
+  font-size: 1.3rem;
+}
+.txDettaglioCategoria {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+}
+.txDettaglioPrezzo {
+  font-size: 1.3rem;
+  font-style: italic;
+}
+.txDettaglioTitolo {
+  font-size: 1.5rem;
+}
+.txDettaglioDescrizione {
+  font-size: 1rem;
+}
+.txDettaglioDescrizione2 {
+  font-family: Book Antiqua;
+  margin-top: 1.5em;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 2rem;
+}
+.grassetto1 {
+  font-weight: bold;
+}
+.postazione {
+  font-style: italic;
+}
+.NOpostazione {
+  color: white;
+}
+.navbar.navbar-dark.bg-dark {
+  background-color: #aebfbe !important;
+}
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+.align-left {
+  text-align: left;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+
+input.slider {
+  width: 230px;
+}
+
+input[type="range"] {
+  &::-webkit-slider-thumb {
+    background: green !important;
+  }
+  &::-moz-range-thumb {
+    background: green !important;
+  }
+  &::-ms-thumb {
+    background: green !important;
+  }
+}
+
+.statoA {
+  color: red;
+}
+.statoB {
+  color: blue;
+}
+.statoC {
+  color: green;
+}
+/* .classeFiltro {
+} */
+.dettagliClienteCampo {
+  font-weight: bold;
+}
+.prodottoVenditaN {
+  font-weight: bold;
+}
+.visitaVenduto {
+  font-weight: bold;
+  color: #309c54;
+}
+.btn-arancione {
+  color: #e9af42;
+}
+/* selected btn css */
+.btn-group-toggle .btn:not(:disabled):not(.disabled).active,
+.btn-group-toggle .btn:not(:disabled):not(.disabled):active,
+.show > .btn.dropdown-toggle {
+  color: #fff;
+  background-color: #e9af42;
+  border-color: #e9af42;
+}
+
+/* non selected btn css */
+.btn-group-toggle .btn {
+  color: #e9af42;
+  border-color: #e9af42;
+}
+.btn-group-toggle .btn:hover {
+  color: #fff;
+  border-color: #e9af42;
+  background-color: #e9af42;
+}
+.badge.badge-notifiche {
+  font-size: 45%;
+  position: absolute;
+  margin-left: -1em;
+  border-radius: 999px;
+  color: white;
+  background: rgba(255, 0, 0, 0.85);
+}
+@media (max-width: 992px) {
+  .navbar-admin {
+    height: auto !important;
+  }
+}

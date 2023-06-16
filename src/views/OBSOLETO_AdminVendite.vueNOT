@@ -1,0 +1,25 @@
+<template>
+  <div class="admin">
+    <NavbarAdmin />
+<AdminVendite />
+  </div>
+</template>
+
+
+<script>
+// @ is an alias to /src
+ import NavbarAdmin from '../components/NavbarAdmin.vue'
+  import AdminVendite from '../components/AdminVendite.vue'
+
+export default {
+  name: 'Admin',
+  components: {
+    NavbarAdmin,
+    AdminVendite
+  },beforeCreate: function () {
+     if (!this.$session.exists()) {
+       this.$router.replace('/admin')
+     }
+    },
+}
+</script>
