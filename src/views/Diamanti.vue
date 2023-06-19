@@ -1,32 +1,31 @@
 <template>
   <div class="admin">
-    <NavbarAdmin v-if="$session.get('tipo')=='BE'"  />
-    <Navbar v-else  />
-<Diamanti />
+    <NavbarAdmin v-if="$session.get('tipo') == 'BE'" />
+    <Navbar v-else />
+    <Diamanti />
   </div>
 </template>
 
-
 <script>
-// @ is an alias to /src
- import NavbarAdmin from '../components/NavbarAdmin.vue'
- import Navbar from '../components/Navbar.vue'
+import NavbarAdmin from "../components/NavbarAdmin.vue";
+import Navbar from "../components/Navbar.vue";
 
-  import Diamanti from '../components/Diamanti.vue'
+import Diamanti from "../components/Diamanti.vue";
 
 export default {
-  name: 'DiamantiView',
+  name: "DiamantiView",
   components: {
     NavbarAdmin,
     Navbar,
-    Diamanti
-  },beforeCreate: function () {
-     if (!this.$session.exists()) {
-       this.$router.replace('/login')
-     }
-     if(this.$session.get('vetrina')=='1'){
-       this.$router.push({ name: 'vetrina' });
-     }
-    },
-}
+    Diamanti,
+  },
+  beforeCreate: function () {
+    if (!this.$session.exists()) {
+      this.$router.replace("/login");
+    }
+    if (this.$session.get("vetrina") == "1") {
+      this.$router.push({ name: "vetrina" });
+    }
+  },
+};
 </script>

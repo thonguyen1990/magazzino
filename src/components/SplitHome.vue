@@ -1,6 +1,6 @@
 <template>
   <!-- SplitNavBar -->
-  <div style="overflow: hidden;">
+  <div style="overflow: hidden">
     <SplitNavBar></SplitNavBar>
     <div class="row d-flex">
       <div class="split split-left">

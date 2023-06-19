@@ -2,28 +2,27 @@
   <div class="admin">
     <NavbarAdmin />
 
-<GestioneVetrine />
+    <GestioneVetrine />
   </div>
 </template>
 
-
 <script>
-// @ is an alias to /src
- import NavbarAdmin from '../components/NavbarAdmin.vue'
-  import GestioneVetrine from '../components/GestioneVetrine.vue'
+import NavbarAdmin from "../components/NavbarAdmin.vue";
+import GestioneVetrine from "../components/GestioneVetrine.vue";
 
 export default {
-  name: 'GestioneVetrineView',
+  name: "GestioneVetrineView",
   components: {
     NavbarAdmin,
     GestioneVetrine,
-  },beforeCreate: function () {
-     if (!this.$session.exists()) {
-       this.$router.replace('/login')
-     }
-     if(this.$session.get('vetrina')=='1'){
-       this.$router.push({ name: 'vetrina' });
-     }
-    },
-}
+  },
+  beforeCreate: function () {
+    if (!this.$session.exists()) {
+      this.$router.replace("/login");
+    }
+    if (this.$session.get("vetrina") == "1") {
+      this.$router.push({ name: "vetrina" });
+    }
+  },
+};
 </script>

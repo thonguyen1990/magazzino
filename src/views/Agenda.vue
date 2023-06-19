@@ -7,31 +7,28 @@
   </div>
 </template>
 
-
 <script>
-// @ is an alias to /src
- import NavbarAdmin from '../components/NavbarAdmin.vue'
-  import Agenda from '../components/Agenda.vue'
-
-
+import NavbarAdmin from "../components/NavbarAdmin.vue";
+import Agenda from "../components/Agenda.vue";
 
 export default {
-  name: 'AgendaView',
+  name: "AgendaView",
   components: {
     NavbarAdmin,
     Agenda,
-  },beforeCreate: function () {
-     if (!this.$session.exists()) {
-       this.$router.replace('/login')
-     }
-     if(this.$session.get('vetrina')=='1'){
-       this.$router.push({ name: 'vetrina' });
-     }
-    },
-}
+  },
+  beforeCreate: function () {
+    if (!this.$session.exists()) {
+      this.$router.replace("/login");
+    }
+    if (this.$session.get("vetrina") == "1") {
+      this.$router.push({ name: "vetrina" });
+    }
+  },
+};
 </script>
 <style>
-  .bg-info{
+.bg-info {
   background-color: #0d3f42 !important;
 }
 </style>

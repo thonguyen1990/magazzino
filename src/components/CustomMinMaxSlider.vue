@@ -1,61 +1,86 @@
 <template>
   <div class="track-container">
-    <span class="range-value min">{{ minValue }} </span> <span class="range-value max">{{ maxValue }}</span>
+    <span class="range-value min">{{ minValue }} </span>
+    <span class="range-value max">{{ maxValue }}</span>
     <div class="track" ref="_vpcTrack"></div>
     <div class="track-highlight" ref="trackHighlight"></div>
     <button class="track-btn track1" ref="track1"></button>
     <button class="track-btn track2" ref="track2"></button>
-    <h5 class="price-value">Price: {{ minValue }}€ <span><span><b-icon icon="dash-lg" font-scale="0.9" style="margin: 0 0.25rem;"></b-icon></span></span> {{ maxValue }}€</h5>
+    <h5 class="price-value">
+      Price: {{ minValue }}€
+      <span
+        ><span
+          ><b-icon
+            icon="dash-lg"
+            font-scale="0.9"
+            style="margin: 0 0.25rem"
+          ></b-icon></span
+      ></span>
+      {{ maxValue }}€
+    </h5>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "vue-price-range",
   data() {
     return {
       min: 10,
-      max: 2200,
+      max: 2500,
       minValue: 235,
-      maxValue: 2130,
+      maxValue: 2300,
       step: 5,
       totalSteps: 0,
       percentPerStep: 1,
       trackWidth: null,
       isDragging: false,
       pos: {
-        curTrack: null
-      }
-    }
-
+        curTrack: null,
+      },
+    };
   },
   methods: {
+    resetMaxMinValue() {
+      this.maxValue = 2300;
+      this.minValue = 235;
+      this.setTrackHightlight();
+
+      // set track1 initial
+      document.querySelector(".track1").style.left =
+        this.valueToPercent(this.minValue) + "%";
+      // track2 initial position
+      document.querySelector(".track2").style.left =
+        this.valueToPercent(this.maxValue) + "%";
+    },
     moveTrack(track, ev) {
       let percentInPx = this.getPercentInPx();
-      let trackX = Math.round(this.$refs._vpcTrack.getBoundingClientRect().left);
+      let trackX = Math.round(
+        this.$refs._vpcTrack.getBoundingClientRect().left
+      );
       let clientX = ev.clientX;
       let moveDiff = clientX - trackX;
 
       let moveInPct = moveDiff / percentInPx;
 
       if (moveInPct < 1 || moveInPct > 100) return;
-      let value = (Math.round(moveInPct / this.percentPerStep) * this.step) + this.min;
+      let value =
+        Math.round(moveInPct / this.percentPerStep) * this.step + this.min;
       if (track === "track1") {
-        if (value >= (this.maxValue - this.step)) return;
+        if (value >= this.maxValue - this.step) return;
         this.minValue = value;
       }
 
       if (track === "track2") {
-        if (value <= (this.minValue + this.step)) return;
+        if (value <= this.minValue + this.step) return;
         this.maxValue = value;
       }
 
       let trackRef = this.$refs[track];
-      if(trackRef && trackRef.style) {
+      if (trackRef && trackRef.style) {
         trackRef.style.left = moveInPct + "%";
       }
-      this.setTrackHightlight()
+      this.setTrackHightlight();
     },
     mousedown(ev, track) {
       if (this.isDragging) return;
@@ -63,28 +88,32 @@ export default {
       this.pos.curTrack = track;
     },
     touchstart(ev, track) {
-      this.mousedown(ev, track)
+      this.mousedown(ev, track);
     },
     mouseup(ev, track) {
       if (!this.isDragging) return;
-      this.isDragging = false
+      this.isDragging = false;
     },
     touchend(ev, track) {
-      this.mouseup(ev, track)
+      this.mouseup(ev, track);
     },
     mousemove(ev, track) {
       if (!this.isDragging) return;
-      this.moveTrack(track, ev)
+      this.moveTrack(track, ev);
     },
     touchmove(ev, track) {
-      this.mousemove(ev.changedTouches[0], track)
+      this.mousemove(ev.changedTouches[0], track);
     },
     valueToPercent(value) {
-      return ((value - this.min) / this.step) * this.percentPerStep
+      return ((value - this.min) / this.step) * this.percentPerStep;
     },
     setTrackHightlight() {
-      this.$refs.trackHighlight.style.left = this.valueToPercent(this.minValue) + "%"
-      this.$refs.trackHighlight.style.width = (this.valueToPercent(this.maxValue) - this.valueToPercent(this.minValue)) + "%"
+      this.$refs.trackHighlight.style.left =
+        this.valueToPercent(this.minValue) + "%";
+      this.$refs.trackHighlight.style.width =
+        this.valueToPercent(this.maxValue) -
+        this.valueToPercent(this.minValue) +
+        "%";
     },
     getPercentInPx() {
       let trackWidth = this.$refs._vpcTrack.offsetWidth;
@@ -98,11 +127,11 @@ export default {
       let track2Left = this.$refs.track2.getBoundingClientRect().left;
 
       if (ev.clientX < track1Left) {
-        this.moveTrack('track1', ev)
-      } else if ((ev.clientX - track1Left) < (track2Left - ev.clientX)) {
-        this.moveTrack('track', ev)
+        this.moveTrack("track1", ev);
+      } else if (ev.clientX - track1Left < track2Left - ev.clientX) {
+        this.moveTrack("track", ev);
       } else {
-        this.moveTrack('track2', ev)
+        this.moveTrack("track2", ev);
       }
     },
   },
@@ -114,59 +143,70 @@ export default {
     this.percentPerStep = 100 / this.totalSteps;
 
     // set track1 initial
-    document.querySelector('.track1').style.left = this.valueToPercent(this.minValue) + "%"
+    document.querySelector(".track1").style.left =
+      this.valueToPercent(this.minValue) + "%";
     // track2 initial position
-    document.querySelector('.track2').style.left = this.valueToPercent(this.maxValue) + "%"
+    document.querySelector(".track2").style.left =
+      this.valueToPercent(this.maxValue) + "%";
 
     // // set initial track highlight
-    this.setTrackHightlight()
+    this.setTrackHightlight();
 
     var self = this;
 
-    ['mouseup', 'mousemove'].forEach(type => {
+    ["mouseup", "mousemove"].forEach((type) => {
       document.body.addEventListener(type, (ev) => {
         if (self.isDragging && self.pos.curTrack) {
-          self[type](ev, self.pos.curTrack)
+          self[type](ev, self.pos.curTrack);
         }
-      })
+      });
     });
 
-    ['mousedown', 'mouseup', 'mousemove', 'touchstart', 'touchmove', 'touchend'].forEach(type => {
-      document.querySelector('.track1').addEventListener(type, (ev) => {
+    [
+      "mousedown",
+      "mouseup",
+      "mousemove",
+      "touchstart",
+      "touchmove",
+      "touchend",
+    ].forEach((type) => {
+      document.querySelector(".track1").addEventListener(type, (ev) => {
         ev.stopPropagation();
-        self[type](ev, 'track1')
-      })
+        self[type](ev, "track1");
+      });
 
-      document.querySelector('.track2').addEventListener(type, (ev) => {
+      document.querySelector(".track2").addEventListener(type, (ev) => {
         ev.stopPropagation();
-        self[type](ev, 'track2')
-      })
-    })
+        self[type](ev, "track2");
+      });
+    });
 
     // on track click
     // determine direction based on click proximity
     // determine percent to move based on track.clientX - click.clientX
-    document.querySelector('.track').addEventListener('click', function (ev) {
+    document.querySelector(".track").addEventListener("click", function (ev) {
       ev.stopPropagation();
-      self.setClickMove(ev)
-    })
+      self.setClickMove(ev);
+    });
 
-    document.querySelector('.track-highlight').addEventListener('click', function (ev) {
-      ev.stopPropagation();
-      self.setClickMove(ev)
-    })
-  }
-}
+    document
+      .querySelector(".track-highlight")
+      .addEventListener("click", function (ev) {
+        ev.stopPropagation();
+        self.setClickMove(ev);
+      });
+  },
+};
 </script>
 <style>
 .range-value {
   position: absolute;
   bottom: -3rem;
-  border: 1px rgb(158,158,158) solid;
+  border: 1px rgb(158, 158, 158) solid;
   width: 48%;
   text-align: center;
   padding: 0.1rem;
-  color: rgb(158,158,158);
+  color: rgb(158, 158, 158);
 }
 
 .range-value.max {
@@ -198,7 +238,7 @@ export default {
 }
 
 .track-highlight {
-  background-color: rgba(155,155,155,255);
+  background-color: rgba(155, 155, 155, 255);
   z-index: 2;
 }
 
@@ -220,9 +260,12 @@ export default {
   background-color: whitesmoke;
   -ms-touch-action: pan-x;
   touch-action: pan-x;
-  transition: box-shadow .3s ease-out, background-color .3s ease, -webkit-transform .3s ease-out;
-  transition: transform .3s ease-out, box-shadow .3s ease-out, background-color .3s ease;
-  transition: transform .3s ease-out, box-shadow .3s ease-out, background-color .3s ease, -webkit-transform .3s ease-out;
+  transition: box-shadow 0.3s ease-out, background-color 0.3s ease,
+    -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out,
+    background-color 0.3s ease;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out,
+    background-color 0.3s ease, -webkit-transform 0.3s ease-out;
 }
 
 .price-value {
@@ -231,7 +274,7 @@ export default {
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  color: rgb(158,158,158);
+  color: rgb(158, 158, 158);
   font-family: GFS Didot;
   font-size: 15px;
 }

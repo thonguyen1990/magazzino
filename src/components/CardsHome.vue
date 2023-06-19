@@ -26,7 +26,6 @@
             <div class="txtCategoria mt-3 mb-3">
               {{ data.nome }}
             </div>
-            <!-- <p class="card-text text-right" style="margin-right:1em;margin-top:-2em"><small class="text-muted">{{data.nProdotti | prodottOI}}</small></p> -->
           </div>
         </div>
       </div>
@@ -36,11 +35,11 @@
 
 <script>
 import axios from "axios";
-import RecentView from '../views/RecentView.vue'
+import RecentView from "../views/RecentView.vue";
 export default {
-  components:{
-    RecentView
-  }, 
+  components: {
+    RecentView,
+  },
   data() {
     return {
       categorie: [],
