@@ -746,7 +746,6 @@ export default {
           }
         )
         .then((response) => {
-          console.log(response);
           if (response.status === 200 && response.data.result == "OK") {
             this.sendAlert("success");
             this.clearformNuovaLavorazione();

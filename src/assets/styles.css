@@ -233,6 +233,12 @@ input[type="range"] {
 .btn-arancione {
   color: #e9af42;
 }
+
+.btn-group,
+.btn-group-vertical {
+  flex-wrap: wrap;
+}
+
 /* selected btn css */
 .btn-group-toggle .btn:not(:disabled):not(.disabled).active,
 .btn-group-toggle .btn:not(:disabled):not(.disabled):active,

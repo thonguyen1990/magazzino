@@ -265,7 +265,6 @@ export default {
           this.$route.params.genitore
       )
       .then((response) => {
-        console.log(response);
         this.prodotti = response.data.prodotti;
         this.idCorrente = this.prodotti[0].id;
 

@@ -42,7 +42,6 @@ export default {
     editNotaProdotto(id, prods) {
       this.prodotti = prods;
       this.notaProdotto = this.prodotti.filter((prod) => prod.id == id)[0];
-      console.log(this.notaProdotto);
       this.$bvModal.show("modal-notaProdotto");
     },
     onSubmitNotaProdotto() {
@@ -61,7 +60,6 @@ export default {
           }
         )
         .then((response) => {
-          console.log(response);
           if (response.status === 200 && response.data.result == "OK") {
             this.sendAlert("success");
 
@@ -69,7 +67,6 @@ export default {
             this.$bvModal.hide("modal-notaProdotto");
             this.$emit("aggiornaProdotti");
           } else {
-            console.log(response);
             this.sendAlert("fail");
           }
         })

@@ -565,8 +565,6 @@ export default {
             }
           });
           this.oggettiVenduti = lista;
-
-          console.log(this.oggettiVenduti);
           this.isLoading = false;
         })
         .catch((err) => {

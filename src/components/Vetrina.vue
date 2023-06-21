@@ -109,7 +109,6 @@ export default {
     cambiaFoto(dir) {
       if (dir == 0) {
         clearInterval(this.timeUpdate);
-        console.log("ORA: stop");
         this.play = false;
       } else if (dir == 100) {
         this.play = true;
@@ -135,7 +134,6 @@ export default {
       clearInterval(this.timeUpdate);
       this.timeUpdate = setInterval(this.aggiornaVetrina, 5000);
       if (this.conta >= this.imgs.length - 1) {
-        console.log("0");
         this.conta = 0;
       } else {
         this.conta++;

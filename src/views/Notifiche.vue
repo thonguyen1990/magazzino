@@ -130,7 +130,6 @@ export default {
             this.$session.get("secret")
         )
         .then((response) => {
-          console.log(response);
           if (response.status === 200 && response.data.stato == "OK") {
             this.notifiche = response.data.listaNotifiche;
           } else {
@@ -154,7 +153,6 @@ export default {
             this.$session.get("secret")
         )
         .then((response) => {
-          console.log(response);
           if (response.status === 200 && response.data.stato == "OK") {
             this.renderIcon = false;
             this.getNotifiche();

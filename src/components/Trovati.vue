@@ -48,6 +48,18 @@
           </b-breadcrumb-item>
         </b-breadcrumb>
       </b-col>
+      <b-col
+        style="display: flex; align-items: center; justify-content: flex-end"
+      >
+        VISTA
+        <span class="ml-3 grid-fill" @click="gridFill"
+          ><span
+            ><b-icon icon="grid-3x3-gap-fill" font-scale="1.5"></b-icon></span
+        ></span>
+        <span class="list" @click="listFill"
+          ><span><b-icon icon="list" font-scale="1.5"></b-icon></span
+        ></span>
+      </b-col>
     </b-row>
     <b-row>
       <b-col>
@@ -148,87 +160,13 @@
       </b-col>
     </b-row>
     <div class="row">
-      <div
-        v-bind:key="data.index"
-        v-for="data in orderedProducts"
-        :title="data.titolo"
-        class="col-md-3 col-sm-6 col-xs-6 col-6 mt-3"
-        @click="navigaDettaglioo(data.id)"
-      >
-        <div class="card h-100">
-          <div v-if="data.postazione != ''" class="postazione">
-            {{ data.postazione }}
-          </div>
-          <div v-else class="NOpostazione">-</div>
-          <b-img
-            v-if="data.imgs[0] == null"
-            :src="imagePlace"
-            alt="Responsive image1"
-            img-top
-            class="img-categorie2"
-          ></b-img>
-          <img
-            v-else
-            v-img
-            :src="data.imgs[0] + '?' + $session.get('secret')"
-            alt="Responsive image2"
-            img-top
-            class="img-categorie2"
-            @click.stop=""
-          />
-
-          <div class="mt-1 mb-1">
-            <div>{{ data.titolo }}</div>
-            <div>{{ data | showdescrizione(cat_mostrare_desc) }}</div>
-            <div>{{ data.ct | toCT }}</div>
-            <div>{{ data.prezzo | valuta }}</div>
-          </div>
-
-          <div v-bind:key="cat.index" v-for="cat in data.categorie">
-            <b-icon
-              v-if="cat.nomeCat == 'INVENTARIO'"
-              style="position: absolute; bottom: 0.1em; left: 1em"
-              icon="info"
-              font-scale="1.5"
-            ></b-icon>
-          </div>
-          <div v-bind:key="cat.index" v-for="cat in data.categorie">
-            <b-icon
-              v-if="cat.nomeCat == 'ORDINATI'"
-              style="position: absolute; bottom: 0.1em; left: 1em"
-              icon="truck"
-              font-scale="1.5"
-            ></b-icon>
-          </div>
-          <b-icon
-            v-on:click.stop
-            @click="editNotaProd(data.id)"
-            style="position: absolute; bottom: 0.1em"
-            icon="pencil-square"
-            font-scale="1.5"
-          ></b-icon>
-
-          <b-icon
-            v-if="!data.favorito"
-            v-on:click.stop
-            @click="addFavourite(data.id)"
-            style="position: absolute; bottom: 0.1em; right: 0.4em"
-            icon="star"
-            font-scale="1.5"
-          ></b-icon>
-          <b-icon
-            v-if="data.favorito"
-            v-on:click.stop
-            @click="removeFavourite(data.id)"
-            style="position: absolute; bottom: 0.1em; right: 0.4em"
-            variant="warning"
-            icon="star-fill"
-            font-scale="1.5"
-          ></b-icon>
-        </div>
+      <div v-if="gridfill" style="width: 100%">
+        <GridFillProduct :prodotti="orderedProducts" />
+      </div>
+      <div v-else="listfill" style="width: 100%">
+        <ListFillProduct :prodotti="orderedProducts" />
       </div>
     </div>
-
     <NotaProdotto
       ref="notaProd"
       @aggiornaProdotti="updateProductTable()"
@@ -240,13 +178,18 @@
 import axios from "axios";
 import lodash from "lodash";
 import NotaProdotto from "../components/NotaProdotto.vue";
+import GridFillProduct from "./GridFillProduct.vue";
+import ListFillProduct from "./ListFillProduct.vue";
 
 export default {
   components: {
     NotaProdotto,
+    GridFillProduct,
+    ListFillProduct,
   },
   data() {
     return {
+      gridfill: true,
       prodotti: [],
       listaFavoriti: [],
       cat_mostrare_desc: [],
@@ -270,13 +213,15 @@ export default {
       ordina: { per: "", dir: "asc" },
     };
   },
-
   mounted() {
     this.categorieDaMostrare();
   },
   methods: {
-    editNotaProd(id) {
-      this.$refs.notaProd.editNotaProdotto(id, this.prodotti);
+    gridFill() {
+      this.gridfill = true;
+    },
+    listFill() {
+      this.gridfill = false;
     },
     ordinamento(x) {
       if (x == this.ordina.per) {
@@ -287,8 +232,11 @@ export default {
         this.ordina.dir = "asc";
       }
     },
-
     filtroTipo1(t) {
+      this.prodotti.forEach((pro) => {
+        console.log(pro.ordinamentoCharTitolo);
+      });
+
       this.anelli = false;
       this.orecchini = false;
       this.tipoTutto = false;
@@ -452,14 +400,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-          console.log("2");
         });
-    },
-    navigaDettaglioo(id) {
-      this.$router.push({
-        name: "categorie",
-        params: { livello: "4", genitore: id },
-      });
     },
     favoriti() {
       this.isLoading = true;
@@ -479,34 +420,6 @@ export default {
           });
           this.prodotti = myProd;
           this.isLoading = false;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    addFavourite(id) {
-      axios
-        .get(
-          this.$store.state.settings.URL_SERVER +
-            "API/v1.php?addFavourite&id=" +
-            id
-        )
-        .then((response) => {
-          this.favoriti();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    removeFavourite(id) {
-      axios
-        .get(
-          this.$store.state.settings.URL_SERVER +
-            "API/v1.php?removeFavourite&id=" +
-            id
-        )
-        .then((response) => {
-          this.favoriti();
         })
         .catch((err) => {
           console.log(err);
@@ -567,31 +480,31 @@ export default {
           returnDiamante = true;
         }
         if (myAnelli) {
-          if (diamante.tipoProdotto == "ANELLI") {
+          if (diamante.ordinamentoCharTitolo == "A") {
             returnDiamante = true;
           }
         }
         if (myBraccialetti) {
-          if (diamante.tipoProdotto == "BRACCIALETTI") {
+          if (diamante.ordinamentoCharTitolo == "B") {
             returnDiamante = true;
           }
         }
         if (myCiondoli) {
-          if (diamante.tipoProdotto == "CIONDOLI") {
+          if (diamante.ordinamentoCharTitolo == "C") {
             returnDiamante = true;
           }
         }
         if (myOrecchini) {
-          if (diamante.tipoProdotto == "ORECCHINI") {
+          if (diamante.ordinamentoCharTitolo == "O") {
             returnDiamante = true;
           }
         }
         if (
           myTipoAltro &&
-          diamante.tipoProdotto != "ANELLI" &&
-          diamante.tipoProdotto != "BRACCIALETTI" &&
-          diamante.tipoProdotto != "CIONDOLI" &&
-          diamante.tipoProdotto != "ORECCHINI"
+          diamante.ordinamentoCharTitolo != "A" &&
+          diamante.ordinamentoCharTitolo != "B" &&
+          diamante.ordinamentoCharTitolo != "C" &&
+          diamante.ordinamentoCharTitolo != "O"
         ) {
           returnDiamante = true;
         }
@@ -639,5 +552,16 @@ export default {
 
 .trovati-nav > label {
   width: 11rem;
+}
+
+.grid-fill {
+  border-right: 1px black solid;
+  padding-right: 0.5rem;
+  cursor: pointer;
+}
+
+.list {
+  padding-left: 0.3rem;
+  cursor: pointer;
 }
 </style>
